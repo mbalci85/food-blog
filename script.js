@@ -312,3 +312,55 @@ const meals = [
 		id: '53000',
 	},
 ];
+
+const displayMenu = (list) => {
+	const mealContainer = document.getElementById('meals-container');
+
+	const allMeals = list
+		.map((item) => {
+			return `<div class='meal'>
+
+        <img src=${item.imageUrl} alt=${item.name} class='meal-image'/>
+        <div class='meal-info'>
+            <p>
+                ${item.name}
+            </p>
+            <p class='item-category'>
+            ${item.category}
+        </p>
+        </div>
+        
+        </div>`;
+		})
+		.join('');
+
+	// console.log(allMeals);
+	mealContainer.innerHTML = allMeals;
+};
+
+const displayButtons = () => {
+	const btnContainer = document.getElementById('buttons-container');
+
+	const categories = meals.reduce(
+		(result, item) => {
+			if (!result.includes(item.category)) {
+				result.push(item.category);
+			}
+			return result;
+		},
+		['All']
+	);
+
+	const catButtons = categories
+		.map((category) => {
+			return `<button class='filter-btn' id=${category}>${category}</button>`;
+		})
+		.join('');
+
+	btnContainer.innerHTML = catButtons;
+};
+
+window.onload = function () {
+	displayMenu(meals);
+	displayButtons();
+};
