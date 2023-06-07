@@ -319,18 +319,18 @@ const displayMenu = (list) => {
 	const allMeals = list
 		.map((item) => {
 			return `<div class='meal'>
-
-        <img src=${item.imageUrl} alt=${item.name} class='meal-image'/>
-        <div class='meal-info'>
-            <p>
-                ${item.name}
+    
+            <img src=${item.imageUrl} alt=${item.name} class='meal-image'/>
+            <div class='meal-info'>
+                <p>
+                    ${item.name}
+                </p>
+                <p class='item-category'>
+                ${item.category}
             </p>
-            <p class='item-category'>
-            ${item.category}
-        </p>
-        </div>
-        
-        </div>`;
+            </div>
+    
+            </div>`;
 		})
 		.join('');
 
@@ -353,7 +353,7 @@ const displayButtons = () => {
 
 	const catButtons = categories
 		.map((category) => {
-			return `<button class='filter-btn' id=${category}>${category}</button>`;
+			return `<button onclick='filterMenu(event)' class='filter-btn' id=${category}>${category}</button>`;
 		})
 		.join('');
 
@@ -363,4 +363,16 @@ const displayButtons = () => {
 window.onload = function () {
 	displayMenu(meals);
 	displayButtons();
+};
+
+const filterMenu = (e) => {
+	const category = e.currentTarget.id;
+	console.log(category);
+	const filteredMenu = meals.filter((meal) => category == meal.category);
+
+	if (category == 'All') {
+		displayMenu(meals);
+	} else {
+		displayMenu(filteredMenu);
+	}
 };
