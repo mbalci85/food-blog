@@ -376,3 +376,59 @@ const filterMenu = (e) => {
 		displayMenu(filteredMenu);
 	}
 };
+
+//Hamburger Menu
+
+const menuIcon = document.querySelector('.menu-icon');
+const openMenu = () => {
+	const btnContainer = document.querySelector('.buttons-container');
+	btnContainer.classList.toggle('mobile-menu');
+};
+
+menuIcon.onclick = openMenu;
+
+//Theme Toggle
+
+const themeButton = document.querySelector('.theme-btn');
+const toggleTheme = () => {
+	const body = document.querySelector('body');
+	const labels = document.querySelectorAll('label');
+	console.log(labels);
+
+	if (body.style.backgroundColor === 'black') {
+		body.style.backgroundColor = 'white';
+		themeButton.innerHTML = 'Dark Mode';
+		menuIcon.style.color = 'rgb(53,50,50)';
+		for (let i = 0; i < labels.length; i++) {
+			labels[i].style.color = 'black';
+		}
+	} else {
+		body.style.backgroundColor = 'black';
+		themeButton.innerHTML = 'Light Mode';
+		menuIcon.style.color = 'white';
+		for (let i = 0; i < labels.length; i++) {
+			labels[i].style.color = 'white';
+		}
+		// const labelLight = labels.map((label) => (label.style.color = 'white'));
+		console.log(labelLight);
+	}
+};
+
+themeButton.onclick = toggleTheme;
+
+// If you want to set the color property of each label to 'white' using map(), you can modify your code as follows:
+
+// javascript
+// Copy code
+// const labels = document.querySelectorAll('label');
+// const labelLight = Array.from(labels).map((label) => {
+//   label.style.color = 'white';
+//   return label;
+// });
+// Here's what the code does:
+
+// document.querySelectorAll('label') returns a NodeList.
+// Array.from(labels) converts the NodeList into an array so that you can use array methods like map().
+// .map((label) => { ... }) iterates over each label in the array and sets the color property of the label to 'white'. It also returns the label itself.
+// The resulting array labelLight will contain the modified labels.
+// By returning label from the map() callback function, you can retain the modified labels in the resulting array

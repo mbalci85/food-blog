@@ -136,7 +136,7 @@ footer {
         padding: 0 20px;
     }
 
-    #menu-icon {
+    .menu-icon {
         font-size: 36px;
         color: rgb(53, 50, 50);
         cursor: pointer;
