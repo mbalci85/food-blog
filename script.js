@@ -393,7 +393,7 @@ const themeButton = document.querySelector('.theme-btn');
 const toggleTheme = () => {
 	const body = document.querySelector('body');
 	const labels = document.querySelectorAll('label');
-	console.log(labels);
+	const formHeading = document.querySelector('#form-heading');
 
 	if (body.style.backgroundColor === 'black') {
 		body.style.backgroundColor = 'white';
@@ -402,6 +402,7 @@ const toggleTheme = () => {
 		for (let i = 0; i < labels.length; i++) {
 			labels[i].style.color = 'black';
 		}
+		formHeading.style.color = 'black';
 	} else {
 		body.style.backgroundColor = 'black';
 		themeButton.innerHTML = 'Light Mode';
@@ -409,8 +410,7 @@ const toggleTheme = () => {
 		for (let i = 0; i < labels.length; i++) {
 			labels[i].style.color = 'white';
 		}
-		// const labelLight = labels.map((label) => (label.style.color = 'white'));
-		console.log(labelLight);
+		formHeading.style.color = 'white';
 	}
 };
 
