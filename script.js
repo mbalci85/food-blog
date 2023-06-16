@@ -432,3 +432,7 @@ themeButton.onclick = toggleTheme;
 // .map((label) => { ... }) iterates over each label in the array and sets the color property of the label to 'white'. It also returns the label itself.
 // The resulting array labelLight will contain the modified labels.
 // By returning label from the map() callback function, you can retain the modified labels in the resulting array
+
+//ADD NEW MEAL
+
+const submitButton = document.querySelector('#submit-btn');
