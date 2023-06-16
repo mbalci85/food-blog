@@ -318,7 +318,7 @@ const displayMenu = (list) => {
 
 	const allMeals = list
 		.map((item) => {
-			return `<div class='meal'>
+			return `<a class='meal' href='details.html'>
     
             <img src=${item.imageUrl} alt=${item.name} class='meal-image'/>
             <div class='meal-info'>
@@ -330,7 +330,7 @@ const displayMenu = (list) => {
             </p>
             </div>
     
-            </div>`;
+            </a>`;
 		})
 		.join('');
 
