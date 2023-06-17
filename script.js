@@ -436,3 +436,17 @@ themeButton.onclick = toggleTheme;
 //ADD NEW MEAL
 
 const submitButton = document.querySelector('#submit-btn');
+
+submitButton.addEventListener('click', (e) => {
+	e.preventDefault(); //prevent default func of form
+
+	const name = document.querySelector('#meal-name').value;
+	const imageUrl = document.querySelector('#meal-url').value;
+	const category = document.querySelector('#form-select').value;
+	const meal = {
+		name,
+		imageUrl,
+		category,
+	};
+	console.log(meal);
+});

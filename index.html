@@ -23,16 +23,20 @@
             <h2 id="form-heading">Add a new meal</h2>
             <div class="input-container">
                 <label for="name">Name</label>
-                <input type="text" name="name" placeholder="Enter meal name" required>
+                <input type="text" name="name" placeholder="Enter meal name" id="meal-name" required>
             </div>
             <div class="input-container">
                 <label for="imageURL">Image URL</label>
-                <input type="text" name="imageURL" placeholder="Enter image URL" required>
+                <input type="text" name="imageURL" placeholder="Enter image URL" id="meal-url" required>
             </div>
             <div class="input-container">
                 <label for="category">Category</label>
                 <select name="category" id="form-select" required>
                     <option value="">Select a category</option>
+                    <option value="">Vegetarian</option>
+                    <option value="">Beef</option>
+                    <option value="">Seafood</option>
+                    <option value="">Chicken</option>
                 </select>
             </div>
             <button type="submit" id="submit-btn">Submit</button>
