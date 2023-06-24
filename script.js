@@ -454,5 +454,6 @@ submitButton.addEventListener('click', (e) => {
 	</p>
 	</div>
 	</a>`;
-	mealContainer.appendChild(newMeal);
+
+	mealContainer.insertBefore(newMeal, mealContainer.firstChild);
 });
