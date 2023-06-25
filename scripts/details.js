@@ -313,13 +313,15 @@ const meals = [
 	},
 ];
 
+let currentCategory; // to use to filter similar meals
+
 window.onload = function () {
 	const urlParams = new URLSearchParams(window.location.search);
 	let currentID = urlParams.get('id');
-	console.log(currentID);
 
 	const currentMeal = meals.filter((meal) => meal.id == currentID)[0];
-	console.log(currentMeal);
+
+	currentCategory = currentMeal.category; // receiving selected meals category
 
 	const mealContainer = document.querySelector('main');
 	const currentMealCard = `<div class='current-meal'> 
@@ -333,10 +335,7 @@ window.onload = function () {
   </div>
 
     <img src='${currentMeal.imageUrl}' alt=' ${currentMeal.name}' class='current-meal-image'>
-    
-    
-    
-    
+
     </div>`;
 
 	mealContainer.innerHTML = currentMealCard;
@@ -388,13 +387,9 @@ const moreMeals = document.querySelector('#more-meals');
 const moreMealsContainer = document.querySelector('#similar-meals-container');
 
 moreMeals.addEventListener('click', () => {
-	const urlParams = new URLSearchParams(window.location.search);
-	let currentID = urlParams.get('id');
-	const currentMealCategory = meals.filter((meal) => meal.id == currentID)[0].category;
-
 	const filteredMeals = meals
 		.map((meal) => {
-			if (currentMealCategory == meal.category) {
+			if (currentCategory == meal.category) {
 				return `<a class='meal' href='../pages/details.html?id=${meal.id}'>
     
             <img src=${meal.imageUrl} alt=${meal.name} class='meal-image'/>
