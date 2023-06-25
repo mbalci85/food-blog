@@ -312,151 +312,32 @@ const meals = [
 		id: '53000',
 	},
 ];
-const mealContainer = document.getElementById('meals-container');
-const displayMenu = (list) => {
-	const allMeals = list
-		.map((item) => {
-			return `<a class='meal' href='../pages/details.html?id=${item.id}'>
-    
-            <img src=${item.imageUrl} alt=${item.name} class='meal-image'/>
-            <div class='meal-info'>
-                <p>
-                    ${item.name}
-                </p>
-                <p class='item-category'>
-                ${item.category}
-            </p>
-            </div>
-    
-            </a>`;
-		})
-		.join('');
-
-	// console.log(allMeals);
-	mealContainer.innerHTML = allMeals;
-};
-
-const displayButtons = () => {
-	const btnContainer = document.getElementById('buttons-container');
-
-	const categories = meals.reduce(
-		(result, item) => {
-			if (!result.includes(item.category)) {
-				result.push(item.category);
-			}
-			return result;
-		},
-		['All']
-	);
-
-	const catButtons = categories
-		.map((category) => {
-			return `<button onclick='filterMenu(event)' class='filter-btn' id=${category}>${category}</button>`;
-		})
-		.join('');
-
-	btnContainer.innerHTML = catButtons;
-};
 
 window.onload = function () {
-	displayMenu(meals);
-	displayButtons();
+	const urlParams = new URLSearchParams(window.location.search);
+	let currentID = urlParams.get('id');
+	console.log(currentID);
+
+	const currentMeal = meals.filter((meal) => meal.id == currentID)[0];
+	console.log(currentMeal);
+
+	const mealContainer = document.querySelector('main');
+	const currentMealCard = `<div class='current-meal'> 
+  <div class='current-meal-info'>
+  <h2>
+        ${currentMeal.name}
+    </h2>
+    <p class='current-meal-category'>
+    ${currentMeal.category}
+    </p>
+  </div>
+
+    <img src='${currentMeal.imageUrl}' alt=' ${currentMeal.name}' class='current-meal-image'>
+    
+    
+    
+    
+    </div>`;
+
+	mealContainer.innerHTML = currentMealCard;
 };
-
-const filterMenu = (e) => {
-	const category = e.currentTarget.id;
-	console.log(category);
-	const filteredMenu = meals.filter((meal) => category == meal.category);
-
-	if (category == 'All') {
-		displayMenu(meals);
-	} else {
-		displayMenu(filteredMenu);
-	}
-};
-
-//Hamburger Menu
-
-const menuIcon = document.querySelector('.menu-icon');
-const openMenu = () => {
-	const btnContainer = document.querySelector('.buttons-container');
-	btnContainer.classList.toggle('mobile-menu');
-};
-
-menuIcon.onclick = openMenu;
-
-//Theme Toggle
-
-const themeButton = document.querySelector('.theme-btn');
-const toggleTheme = () => {
-	const body = document.querySelector('body');
-	const labels = document.querySelectorAll('label');
-	const formHeading = document.querySelector('#form-heading');
-
-	if (body.style.backgroundColor === 'black') {
-		body.style.backgroundColor = 'white';
-		themeButton.innerHTML = 'Dark Mode';
-		menuIcon.style.color = 'rgb(53,50,50)';
-		for (let i = 0; i < labels.length; i++) {
-			labels[i].style.color = 'black';
-		}
-		formHeading.style.color = 'black';
-	} else {
-		body.style.backgroundColor = 'black';
-		themeButton.innerHTML = 'Light Mode';
-		menuIcon.style.color = 'white';
-		for (let i = 0; i < labels.length; i++) {
-			labels[i].style.color = 'white';
-		}
-		formHeading.style.color = 'white';
-	}
-};
-
-themeButton.onclick = toggleTheme;
-
-// If you want to set the color property of each label to 'white' using map(), you can modify your code as follows:
-
-// javascript
-// Copy code
-// const labels = document.querySelectorAll('label');
-// const labelLight = Array.from(labels).map((label) => {
-//   label.style.color = 'white';
-//   return label;
-// });
-// Here's what the code does:
-
-// document.querySelectorAll('label') returns a NodeList.
-// Array.from(labels) converts the NodeList into an array so that you can use array methods like map().
-// .map((label) => { ... }) iterates over each label in the array and sets the color property of the label to 'white'. It also returns the label itself.
-// The resulting array labelLight will contain the modified labels.
-// By returning label from the map() callback function, you can retain the modified labels in the resulting array
-
-//ADD NEW MEAL
-
-const submitButton = document.querySelector('#submit-btn');
-
-submitButton.addEventListener('click', (e) => {
-	e.preventDefault(); //prevent default func of form
-
-	const name = document.querySelector('#meal-name').value;
-	const imageUrl = document.querySelector('#meal-url').value;
-	const category = document.querySelector('#form-select').value;
-	const newMeal = document.createElement('div');
-	newMeal.innerHTML = `  <a class='meal' href='details.html'>
-	<img src=${imageUrl} alt=${name} class='meal-image'/>
-	<div class='meal-info'>
-		<p>
-			${name}
-		</p>
-		<p class='item-category'>
-		${category}
-	</p>
-	</div>
-	</a>`;
-
-	mealContainer.insertBefore(newMeal, mealContainer.firstChild);
-
-	document.querySelector('#meal-name').value = '';
-	document.querySelector('#meal-url').value = '';
-	document.querySelector('#form-select').value = '';
-});
