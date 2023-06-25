@@ -316,7 +316,7 @@ const mealContainer = document.getElementById('meals-container');
 const displayMenu = (list) => {
 	const allMeals = list
 		.map((item) => {
-			return `<a class='meal' href='details.html'>
+			return `<a class='meal' href='../pages/details.html'>
     
             <img src=${item.imageUrl} alt=${item.name} class='meal-image'/>
             <div class='meal-info'>
@@ -441,7 +441,6 @@ submitButton.addEventListener('click', (e) => {
 	const name = document.querySelector('#meal-name').value;
 	const imageUrl = document.querySelector('#meal-url').value;
 	const category = document.querySelector('#form-select').value;
-
 	const newMeal = document.createElement('div');
 	newMeal.innerHTML = `  <a class='meal' href='details.html'>
 	<img src=${imageUrl} alt=${name} class='meal-image'/>
@@ -456,4 +455,8 @@ submitButton.addEventListener('click', (e) => {
 	</a>`;
 
 	mealContainer.insertBefore(newMeal, mealContainer.firstChild);
+
+	document.querySelector('#meal-name').value = '';
+	document.querySelector('#meal-url').value = '';
+	document.querySelector('#form-select').value = '';
 });
