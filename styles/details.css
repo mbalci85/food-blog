@@ -10,6 +10,11 @@
  .buttons-container p{
      cursor: pointer;
  }
+
+#icon-container {
+    cursor: pointer;
+}
+
  main{
      flex-direction: column;
  }

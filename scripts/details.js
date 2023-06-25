@@ -341,3 +341,75 @@ window.onload = function () {
 
 	mealContainer.innerHTML = currentMealCard;
 };
+
+//Hamburger Menu
+
+const menuIcon = document.querySelector('#menu-icon');
+const openMenu = () => {
+	const btnContainer = document.querySelector('.buttons-container');
+	btnContainer.classList.toggle('mobile-menu');
+};
+
+menuIcon.onclick = openMenu;
+
+const themeButton = document.querySelector('.theme-btn');
+const toggleTheme = () => {
+	const body = document.querySelector('body');
+	const text = document.querySelector('#more-meals');
+	const homeBtn = document.querySelector('#home-btn');
+	const formHeading = document.querySelector('#form-heading');
+	const mealName = document.querySelector('h2');
+
+	if (body.style.backgroundColor === 'black') {
+		body.style.backgroundColor = 'white';
+		themeButton.innerHTML = 'Dark Mode';
+		homeBtn.style.color = 'black';
+		mealName.style.color = 'black';
+		menuIcon.style.color = 'rgb(53,50,50)';
+		text.style.color = 'black';
+		formHeading.style.color = 'black';
+	} else {
+		body.style.backgroundColor = 'black';
+		themeButton.innerHTML = 'Light Mode';
+		homeBtn.style.color = 'white';
+		menuIcon.style.color = 'white';
+		mealName.style.color = 'white';
+		text.style.color = 'white';
+
+		formHeading.style.color = 'white';
+	}
+};
+
+themeButton.onclick = toggleTheme;
+
+//More in the category
+
+const moreMeals = document.querySelector('#more-meals');
+const moreMealsContainer = document.querySelector('#similar-meals-container');
+
+moreMeals.addEventListener('click', () => {
+	const urlParams = new URLSearchParams(window.location.search);
+	let currentID = urlParams.get('id');
+	const currentMealCategory = meals.filter((meal) => meal.id == currentID)[0].category;
+
+	const filteredMeals = meals
+		.map((meal) => {
+			if (currentMealCategory == meal.category) {
+				return `<a class='meal' href='../pages/details.html?id=${meal.id}'>
+    
+            <img src=${meal.imageUrl} alt=${meal.name} class='meal-image'/>
+            <div class='meal-info'>
+                <p>
+                    ${meal.name}
+                </p>
+                <p class='item-category'>
+                ${meal.category}
+            </p>
+            </div>
+    
+            </a>`;
+			}
+		})
+		.join('');
+	moreMealsContainer.innerHTML = filteredMeals;
+});
